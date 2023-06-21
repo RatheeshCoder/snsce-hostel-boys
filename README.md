@@ -1,1 +1,1 @@
-# snsce-hostel-boys
+# snsce_boys

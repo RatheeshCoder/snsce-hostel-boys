@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        label,h2{
+            font-size: 2rem;
+            color: #fff;
+        }
+        button{
+            font-size: 2rem;
+            width: 100%;
+            color: #FFAF00;
+            background-color: black !important;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#myForm").submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = {
+                    date: $("#date").val(),
+                    name: $("#name").val(),
+                    college_id: $("#college_id").val(),
+                    department: $("#department").val(),
+                    year: $("#year").val(),
+                    block: $("#block").val(),
+                    room_no: $("#room_no").val(),
+                    problem: $("#problem").val(),
+                    media: $("#media").val()
+                };
+
+                $.ajax({
+                    url: "/",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        // Handle success if needed
+                        console.log("Form submitted successfully");
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error if needed
+                        console.log("Error: " + error);
+                    }
+                });
+
+                // Reset the form fields after submission
+                $("#myForm")[0].reset();
+            });
+        });
+    </script>
+</head>
+<body style="padding: 20px; background-color: #FFAF00;">
+    <div class="container">
+        <h2>SAY YOUR QUERY</h2>
+        <form id="myForm">
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="college_id">College ID:</label>
+            <input type="text" class="form-control" id="college_id" name="college_id" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="department">Department:</label>
+            <input type="text" class="form-control" id="department" name="department" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" class="form-control" id="year" name="year" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="block">Block Name:</label>
+            <input type="text" class="form-control" id="block" name="block" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="room_no">Room Number:</label>
+            <input type="number" class="form-control" id="room_no" name="room_no" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="problem">Problem Description:</label>
+            <textarea class="form-control" id="problem" name="problem" required></textarea>
+          </div>
+    
+          <div class="form-group">
+            <label for="media">Media (Photo Or Video):</label>
+            <input type="text" class="form-control" id="media" name="media" placeholder="Upload your Drive link" required>
+          </div>
+    
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+</body>
+</html>
